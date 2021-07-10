@@ -14,8 +14,8 @@ test("Função da substring", ()=>{
     l.add('i');
     expect(l.toString()).toBe("i->x->a->c->a->b->a");
     
-    substring = Questao6(l, 1, 4);
-    expect(substring.toString()).toBe("x->a->c");
+    substring = Questao6(l, 2, 6);
+    expect(substring.toString()).toBe("a->c->a->b");
 
 
 })

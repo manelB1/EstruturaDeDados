@@ -1,17 +1,17 @@
 import Fila from "../../src/List3/FilaComLista";
 
-let fila;
+let fila; 
 
 beforeEach(()=>{
     fila = new Fila();
 });
 
 test("Fila utilizando lista", () =>{
-    f.enqueue(1);
-	f.enqueue(2);
-	f.enqueue(3);
-	f.enqueue(4);
-	f.enqueue(5);
-	f.clear();
-	expect(f.isEmpty()).toBe(true);
+    fila.enqueue(1);
+	fila.enqueue(2);
+	fila.enqueue(3);
+	fila.enqueue(4);
+	fila.enqueue(5);
+	fila.clear();
+	expect(fila.isEmpty()).toBe(true);
 })
