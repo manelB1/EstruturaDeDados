@@ -1,3 +1,4 @@
+
 function BinarySearchTree() {
     var Node = function(key) {
         this.key = key
@@ -6,8 +7,9 @@ function BinarySearchTree() {
     }
     var root = null
 
+    //metodo de inserir 
     this.insert = function(key) {
-        var newNode = new Node(key)
+        var newNode = new Node(key)//cria novo nó(11,5,7)
 
         if(root === null) {
             root = newNode
@@ -16,7 +18,7 @@ function BinarySearchTree() {
         }
     }
     
-    var insertNode = function(node, newNode) {
+    var insertNode = function(node, newNode) {//11
         if(node.key > newNode.key) {
             if(node.left === null) {
                 node.left = newNode
@@ -32,6 +34,7 @@ function BinarySearchTree() {
         }
     }
 
+    //metodo de busca
     this.search = function(key) {
         return searchNode(root, key)
     }
@@ -49,6 +52,7 @@ function BinarySearchTree() {
         }
     }
 
+    //remove
     this.remove = function(key) {
         root = removeNode(root, key)
     }
@@ -58,7 +62,7 @@ function BinarySearchTree() {
             return null
         }
         if(key < node.key) {
-            node.left = removeNode(node.left, key)
+            node.left = removeNode(node.left, key)//11 5
             return node
         } else if(key > node.key) {
             node.right = removeNode(node.right, key)
@@ -82,8 +86,9 @@ function BinarySearchTree() {
         }
     }
 
+    //buscar valor minimo
     var findMinNode = function(node) {
-        while(node && node.left !== null) {
+        while(node && node.left !== null) {//por que left? porque tudo que foi inserido a esquerda é o menor valor.
             node = node.left
         }
         return node
@@ -103,10 +108,12 @@ function BinarySearchTree() {
         return null
     }
 
+    //buscar valor maximo
     this.max = function() {
         return maxNode(root)
     }
-
+    
+    //busca o maior valor
     var maxNode = function(node) {
         if(node) {
             while(node && node.right !== null) {
@@ -117,7 +124,9 @@ function BinarySearchTree() {
         return null
     }
 
-    this.inOrderTraverse = function(callback) {
+    
+    // pega todos os elementos e imprime em ordem, do menor para o maior. 
+    this.inOrderTraverse = function(callback) { 
         inOrderTraverseNode(root, callback)
     }
 
@@ -129,7 +138,7 @@ function BinarySearchTree() {
         }
     }
 
-    this.preOrderTraverse = function(callback) {
+    this.preOrderTraverse = function(callback) { //pre order primeiro ele imprime os nós e depois os decendentes 
         preOrderTraverseNode(root, callback)
     }
 
@@ -141,7 +150,7 @@ function BinarySearchTree() {
         }
     }
 
-    this.postOrderTraverse = function(callback) {
+    this.postOrderTraverse = function(callback) {//primeiro ele vai imprimir os decendentes e depois os nós 
         postOrderTraverseNode(root, callback)
     }
 
