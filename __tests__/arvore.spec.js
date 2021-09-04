@@ -1,4 +1,4 @@
-import { arvoreRB } from "../src/arvore";
+import { arvoreRB } from "../src/arvoreRubroNegra";
 
 const VERMELHO = "red";
 const PRETO = 'black'

@@ -9,7 +9,7 @@ export class arvoreRB {
     this.nil = { pai: null, cor: PRETO };
     this.raiz = this.nil;
   }
-
+  //algoritimo de troca
   rotacaoEsquerda(no) {
     let filhoDireito = no.direito;
     no.direito = filhoDireito.esquerdo;
@@ -50,7 +50,7 @@ export class arvoreRB {
     filhoEsquerdo.direito = no;
     no.pai = filhoEsquerdo;
   }
-
+  //inserir um novo no
   inserir(no) {
     no.pai = this.nil;
     let temp = this.nil;
@@ -124,12 +124,13 @@ export class arvoreRB {
     if (!raiz) return null
     
     if (chave == raiz.key) 
-    return raiz;
+      return raiz;
     
     if (chave < raiz.key) 
-    return this.buscar(raiz.esquerdo, chave);
+      return this.buscar(raiz.esquerdo, chave);
     
-    else return this.buscar(raiz.direito, chave);
+    else 
+    return this.buscar(raiz.direito, chave);
   }
 
   minimo(raiz) {
@@ -141,8 +142,10 @@ export class arvoreRB {
   }
 
   transpor(noA, noB) {
-    if (noA.pai == this.nil) this.raiz = noB;
-    else if (noA == noA.pai.esquerdo) noA.pai.esquerdo = noB;
+    if (noA.pai == this.nil) 
+      this.raiz = noB;
+    else if (noA == noA.pai.esquerdo) 
+      noA.pai.esquerdo = noB;
     else noA.pai.direito = noB;
     noB.pai = noA.pai;
   }
@@ -157,12 +160,12 @@ export class arvoreRB {
       raiz = no.direito;
       this.transpor(no, no.direito);
     } else if (no.direito == this.nil) {
-      raiz = no.esquerdo;
-      this.transpor(no, no.esquerdo);
+        raiz = no.esquerdo;
+        this.transpor(no, no.esquerdo);
     } else {
-      temp = this.minimo(no.direito);
-      corInicialDoNo = temp.cor;
-      raiz = temp.direito;
+        temp = this.minimo(no.direito);
+        corInicialDoNo = temp.cor;
+        raiz = temp.direito;
       if (temp.pai == no) {
         raiz.pai = temp;
       } else {
@@ -170,10 +173,10 @@ export class arvoreRB {
         temp.direito = no.direito;
         temp.direito.pai = temp;
       }
-      this.transpor(no, temp);
-      temp.esquerdo = no.esquerdo;
-      temp.esquerdo.pai = temp;
-      temp.cor = no.cor;
+        this.transpor(no, temp);
+        temp.esquerdo = no.esquerdo;
+        temp.esquerdo.pai = temp;
+        temp.cor = no.cor;
     }
     if (corInicialDoNo == PRETO) this.reparoDeExclusao(raiz);
   }
