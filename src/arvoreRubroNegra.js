@@ -32,7 +32,7 @@ export class arvoreRB {
   }
 
   rotacaoDireita(no) {
-    //console.log("rightRotate:" + no.key);
+    
     let filhoEsquerdo = no.esquerdo;
     no.esquerdo = filhoEsquerdo.direito;
 
@@ -77,6 +77,7 @@ export class arvoreRB {
   reparoDeInsercao(no) {
     let temp;
     while (no.pai.cor == VERMELHO) {
+
       if (no.pai == no.pai.pai.esquerdo) {
         temp = no.pai.pai.direito;
         if (temp.cor == VERMELHO) {
@@ -85,6 +86,7 @@ export class arvoreRB {
           no.pai.pai.cor = VERMELHO;
           no = no.pai.pai;
         } else {
+
           if (no == no.pai.direito) {
             no = no.pai;
             this.rotacaoEsquerda(no);
@@ -93,21 +95,24 @@ export class arvoreRB {
           no.pai.pai.cor = VERMELHO;
           this.rotacaoDireita(no.pai.pai);
         }
-      } else {
+      } 
+      else {
         temp = no.pai.pai.esquerdo;
+
         if (temp.cor == VERMELHO) {
           no.pai.cor = PRETO;
           temp.cor = PRETO;
           no.pai.pai.cor = VERMELHO;
           no = no.pai.pai;
-        } else {
+        } 
+        else {
           if (no == no.pai.esquerdo) {
             no = no.pai;
             this.rotacaoDireita(no);
           }
-          no.pai.cor = PRETO;
-          no.pai.pai.cor = VERMELHO;
-          this.rotacaoEsquerda(no.pai.pai);
+            no.pai.cor = PRETO;
+            no.pai.pai.cor = VERMELHO;
+            this.rotacaoEsquerda(no.pai.pai);
         }
       }
     }
@@ -117,13 +122,18 @@ export class arvoreRB {
   
   buscar(raiz, chave) {
     if (!raiz) return null
-    if (chave == raiz.key) return raiz;
-    if (chave < raiz.key) return this.buscar(raiz.esquerdo, chave);
+    
+    if (chave == raiz.key) 
+    return raiz;
+    
+    if (chave < raiz.key) 
+    return this.buscar(raiz.esquerdo, chave);
+    
     else return this.buscar(raiz.direito, chave);
   }
 
   minimo(raiz) {
-    //console.log("minimum:" + raiz.key);
+    
     while (raiz.esquerdo != this.nil) {
       raiz = raiz.esquerdo;
     }
@@ -138,7 +148,7 @@ export class arvoreRB {
   }
 
   excluir(no) {
-    console.log("delete:" + no.key);
+    console.log("valor deletado:" + no.key);
     let raiz;
     let temp = no;
     let corInicialDoNo = temp.cor;
