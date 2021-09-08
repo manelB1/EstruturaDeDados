@@ -9,16 +9,24 @@ export class arvoreRB {
     this.nil = { pai: null, cor: PRETO };
     this.raiz = this.nil;
   }
-  //algoritimo de troca
+  //Rotação direita: 
+
+  // //  y
+  //  x
+   
+  //  rotação a direita de Y vai ser pego o filho a esquerda, que no caso, é o X
+  //  e fazer o X virar o pai de Y. Quando falamos rotação a direita o X vira o pai de Y
+  //  e o filho direito de Y que é o NULL continua sendo o filho direito. Já o filho direito do
+  //  X vai ser o filho esquerdo do Y 
   rotacaoEsquerda(no) {
-    let filhoDireito = no.direito;
+    let filhoDireito = no.direito; 
     no.direito = filhoDireito.esquerdo;
     
-    if (filhoDireito.esquerdo != this.nil) 
+    if (filhoDireito.esquerdo != this.nil) //esta verificando se o filho esquerdo de y é diferente de NULL ou diferente de uma folha
       filhoDireito.esquerdo.pai = no;
       filhoDireito.pai = no.pai;
     
-    if (no.pai == this.nil) 
+    if (no.pai == this.nil) //verifica se o pai de X é igual a NIL. Se o pai de X for NIL é porque X é a raiz da arvore
       this.raiz = filhoDireito;
 
     else if (no == no.pai.esquerdo) 
@@ -57,19 +65,28 @@ export class arvoreRB {
     let temp = this.nil;
     let raiz = this.raiz;
     
-    while (raiz != this.nil) {
+    while (raiz != this.nil) {//
       temp = raiz;
-      if (no.key < raiz.key) raiz = raiz.esquerdo;
-      else raiz = raiz.direito;
+      if (no.key < raiz.key){
+        raiz = raiz.esquerdo;
+      } 
+      else{
+        raiz = raiz.direito;
+      } 
+      
     }
 
     no.pai = temp;
     if (temp == this.nil) 
     this.raiz = no;
-    else if (no.key < temp.key) temp.esquerdo = no;
-    else temp.direito = no;
+    else if (no.key < temp.key){
+      temp.esquerdo = no;
+    } 
+    else{
+      temp.direito = no;
+    } 
 
-    no.esquerdo = this.nil;
+    no.esquerdo = this.nil;//a esquerda do nó é nullo (folha)
     no.direito = this.nil;
     no.cor = VERMELHO;
     this.reparoDeInsercao(no);
@@ -77,23 +94,26 @@ export class arvoreRB {
 
   reparoDeInsercao(no) {
     let temp;
-    while (no.pai.cor == VERMELHO) {
+    
+    while (no.pai.cor == VERMELHO) {//verifica se a cor do pai do filho é vermelha
 
-      if (no.pai == no.pai.pai.esquerdo) {
-        temp = no.pai.pai.direito;
-        if (temp.cor == VERMELHO) {
-          no.pai.cor = PRETO;
-          temp.cor = PRETO;
-          no.pai.pai.cor = VERMELHO;
-          no = no.pai.pai;
-        } else {
+      if (no.pai == no.pai.pai.esquerdo) {//verifica se o  pai é filho esquerdo do avo de z
+        temp = no.pai.pai.direito;//o filho direito do avo de Z vai ser atribuido a variavel temp
+        
+        if (temp.cor == VERMELHO) {//verifica se o tio de Z é vermelho 
+          no.pai.cor = PRETO;       //caso1 se a cor do tio for vermelho o pai de z é pintado de preto
+          temp.cor = PRETO;         //caso 2 a cor do tio fica preto 
+          no.pai.pai.cor = VERMELHO;//caso 2 pinta o avo de vermelho 
+          no = no.pai.pai;          //caso 2 e define que z é o avo
+        }
+         else { //verifica se Z é filho direito do pai 
 
-          if (no == no.pai.direito) {
-            no = no.pai;
+          if (no == no.pai.direito) {// se for filho direito do pai ele entra no caso 3
+            no = no.pai; // z passa a apontar para o seu pai e faz uma rotação a esquerda de Z
             this.rotacaoEsquerda(no);
           }
-          no.pai.cor = PRETO;
-          no.pai.pai.cor = VERMELHO;
+          no.pai.cor = PRETO; //a cor do pai de z vai ser definida como preta 
+          no.pai.pai.cor = VERMELHO; // cor do avo será definida como vermelho
           this.rotacaoDireita(no.pai.pai);
         }
       } 
@@ -146,8 +166,10 @@ export class arvoreRB {
   transpor(noA, noB) {
     if (noA.pai == this.nil) 
       this.raiz = noB;
-    else if (noA == noA.pai.esquerdo) 
+    else if (noA == noA.pai.esquerdo){
       noA.pai.esquerdo = noB;
+    } 
+     
     else noA.pai.direito = noB;
     noB.pai = noA.pai;
   }
@@ -161,16 +183,20 @@ export class arvoreRB {
     if (no.esquerdo == this.nil) {
       raiz = no.direito;
       this.transpor(no, no.direito);
-    } else if (no.direito == this.nil) {
+    } 
+    else if (no.direito == this.nil) {
         raiz = no.esquerdo;
         this.transpor(no, no.esquerdo);
-    } else {
+    } 
+    else {
         temp = this.minimo(no.direito);
         corInicialDoNo = temp.cor;
         raiz = temp.direito;
-      if (temp.pai == no) {
+      
+        if (temp.pai == no) {
         raiz.pai = temp;
-      } else {
+      } 
+      else {
         this.transpor(temp, temp.direito);
         temp.direito = no.direito;
         temp.direito.pai = temp;
