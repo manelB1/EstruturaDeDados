@@ -9,24 +9,16 @@ export class arvoreRB {
     this.nil = { pai: null, cor: PRETO };
     this.raiz = this.nil;
   }
-  //Rotação direita: 
 
-  // //  y
-  //  x
-   
-  //  rotação a direita de Y vai ser pego o filho a esquerda, que no caso, é o X
-  //  e fazer o X virar o pai de Y. Quando falamos rotação a direita o X vira o pai de Y
-  //  e o filho direito de Y que é o NULL continua sendo o filho direito. Já o filho direito do
-  //  X vai ser o filho esquerdo do Y 
   rotacaoEsquerda(no) {
     let filhoDireito = no.direito; 
     no.direito = filhoDireito.esquerdo;
     
-    if (filhoDireito.esquerdo != this.nil) //esta verificando se o filho esquerdo de y é diferente de NULL ou diferente de uma folha
+    if (filhoDireito.esquerdo != this.nil) 
       filhoDireito.esquerdo.pai = no;
       filhoDireito.pai = no.pai;
     
-    if (no.pai == this.nil) //verifica se o pai de X é igual a NIL. Se o pai de X for NIL é porque X é a raiz da arvore
+    if (no.pai == this.nil) 
       this.raiz = filhoDireito;
 
     else if (no == no.pai.esquerdo) 
@@ -58,14 +50,14 @@ export class arvoreRB {
     filhoEsquerdo.direito = no;
     no.pai = filhoEsquerdo;
   }
-  //inserir um novo no
+  
   inserir(no) {
     
     no.pai = this.nil;
     let temp = this.nil;
     let raiz = this.raiz;
     
-    while (raiz != this.nil) {//
+    while (raiz != this.nil) {
       temp = raiz;
       if (no.key < raiz.key){
         raiz = raiz.esquerdo;
@@ -86,7 +78,7 @@ export class arvoreRB {
       temp.direito = no;
     } 
 
-    no.esquerdo = this.nil;//a esquerda do nó é nullo (folha)
+    no.esquerdo = this.nil;
     no.direito = this.nil;
     no.cor = VERMELHO;
     this.reparoDeInsercao(no);
@@ -95,25 +87,25 @@ export class arvoreRB {
   reparoDeInsercao(no) {
     let temp;
     
-    while (no.pai.cor == VERMELHO) {//verifica se a cor do pai do filho é vermelha
+    while (no.pai.cor == VERMELHO) {
 
-      if (no.pai == no.pai.pai.esquerdo) {//verifica se o  pai é filho esquerdo do avo de z
-        temp = no.pai.pai.direito;//o filho direito do avo de Z vai ser atribuido a variavel temp
+      if (no.pai == no.pai.pai.esquerdo) {
+        temp = no.pai.pai.direito;
         
-        if (temp.cor == VERMELHO) {//verifica se o tio de Z é vermelho 
-          no.pai.cor = PRETO;       //caso1 se a cor do tio for vermelho o pai de z é pintado de preto
-          temp.cor = PRETO;         //caso 2 a cor do tio fica preto 
-          no.pai.pai.cor = VERMELHO;//caso 2 pinta o avo de vermelho 
-          no = no.pai.pai;          //caso 2 e define que z é o avo
+        if (temp.cor == VERMELHO) {
+          no.pai.cor = PRETO;       
+          temp.cor = PRETO;         
+          no.pai.pai.cor = VERMELHO;
+          no = no.pai.pai;          
         }
-         else { //verifica se Z é filho direito do pai 
+         else { 
 
-          if (no == no.pai.direito) {// se for filho direito do pai ele entra no caso 3
-            no = no.pai; // z passa a apontar para o seu pai e faz uma rotação a esquerda de Z
+          if (no == no.pai.direito) {
+            no = no.pai; 
             this.rotacaoEsquerda(no);
           }
-          no.pai.cor = PRETO; //a cor do pai de z vai ser definida como preta 
-          no.pai.pai.cor = VERMELHO; // cor do avo será definida como vermelho
+          no.pai.cor = PRETO; 
+          no.pai.pai.cor = VERMELHO; 
           this.rotacaoDireita(no.pai.pai);
         }
       } 
