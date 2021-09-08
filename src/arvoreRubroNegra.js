@@ -52,6 +52,7 @@ export class arvoreRB {
   }
   //inserir um novo no
   inserir(no) {
+    
     no.pai = this.nil;
     let temp = this.nil;
     let raiz = this.raiz;
@@ -117,6 +118,7 @@ export class arvoreRB {
       }
     }
     this.raiz.cor = PRETO;
+    
   }
 
   
