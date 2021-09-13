@@ -22,18 +22,19 @@ test("Teste de inserir e remover", ()=>{
   
   
 
-  rb.inserir({ key: 6, cor: VERMELHO });
+  rb.inserir({ key: 60, cor: VERMELHO });
   raiz = rb.raiz;
-  expect(raiz.key).toBe(6)
+  expect(raiz.key).toBe(60)
   
   
-  rb.inserir({key: 5, cor: VERMELHO});
-  rb.inserir({key: 4, cor: VERMELHO});
-  rb.inserir({key: 3, cor: VERMELHO});
-  rb.inserir({key: 7, cor: VERMELHO});
+  rb.inserir({key: 50, cor: VERMELHO});
+  rb.inserir({key: 80, cor: VERMELHO});
+  rb.inserir({key: 10, cor: VERMELHO});
+  rb.inserir({key: 11, cor: VERMELHO});
   
-  rb.excluir(rb.buscar(rb.raiz, 3))
-  expect(rb.buscar(rb.raiz, 3)).toBeNull()
+
+  rb.excluir(rb.buscar(rb.raiz, 11))
+  expect(rb.buscar(rb.raiz, 11)).toBeNull()
   
   console.log(rb.raiz)
   
