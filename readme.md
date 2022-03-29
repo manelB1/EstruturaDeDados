@@ -5,4 +5,4 @@ A disciplina de Estruturas de dados segue uma abordagem de desenvolvimento dirig
 
 Será descrito o Tipo Abstrato de Dados e suas funções independente de saber como elas são implementadas ou como os dados serão armazenados.
 Serão criados pequenos testes para validar o conceito do Tipo de Dado Abstrato. (note que não temos a intenção de realizar todos os testes possíveis)
-É implementada a classe, em JavaScript, para representar o Tipo Abstrato de Dados.
+É implementada a classe, em JavaScript, para representar o Tipo Abstrato de Dados. 
